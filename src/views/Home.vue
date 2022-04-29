@@ -1,18 +1,25 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <input @keydown.enter="addTask(inputValue)" v-model="inputValue" type="text">
+  <ul>
+    <Task 
+      v-for="task of tasks"
+      :task="task"
+      :key="task"
+    />
+  </ul>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+<script setup lang="ts">
+  import Task from '@/components/task.vue'
 
-export default defineComponent({
-  name: 'Home',
-  components: {
-    HelloWorld,
-  },
-});
+  import { ref } from 'vue'
+
+  const inputValue = ref<string>('')
+
+  const tasks = ref<string[]>([])
+
+  const addTask = (): void => {
+    tasks.value.push(inputValue.value)
+    inputValue.value = ''
+  }
 </script>
