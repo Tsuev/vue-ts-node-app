@@ -1,25 +1,21 @@
 <template>
-  <input @keydown.enter="addTask(inputValue)" v-model="inputValue" type="text">
-  <ul>
-    <Task 
-      v-for="task of tasks"
-      :task="task"
-      :key="task"
-    />
-  </ul>
+  <div class="home">
+  <carousel/>
+
+  <section class="cards container p-3">
+    <div class="row">
+      <card />
+      <card />
+      <card />
+      <card />
+      <card />
+    </div>
+  </section>
+  </div>
+
 </template>
 
 <script setup lang="ts">
-  import Task from '@/components/task.vue'
-
-  import { ref } from 'vue'
-
-  const inputValue = ref<string>('')
-
-  const tasks = ref<string[]>([])
-
-  const addTask = (): void => {
-    tasks.value.push(inputValue.value)
-    inputValue.value = ''
-  }
+import Carousel from '@/components/carousel.vue'
+import Card from '@/components/card.vue'
 </script>
